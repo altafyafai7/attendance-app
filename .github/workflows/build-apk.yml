@@ -31,3 +31,19 @@ jobs:
       with:
         name: attendance-app-debug
         path: app/build/outputs/apk/debug/app-debug.apk
+
+    - name: Create Release
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: attendance-app/app/build/outputs/apk/debug/app-debug.apk
+        tag_name: v1.0.${{ github.run_number }}
+        name: Attendance App v1.0.${{ github.run_number }}
+        body: |
+          Automatic build of Attendance App.
+          - Added Excel and PDF export features.
+          - Native Android (Kotlin/Compose)
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
