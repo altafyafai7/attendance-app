@@ -15,4 +15,4 @@ if ! command -v "$JAVACMD" >/dev/null 2>&1; then
 fi
 
 # Run gradle wrapper
-exec "$JAVACMD" -jar "$(dirname "$0")/gradle/wrapper/gradle-wrapper.jar" "$@"
+exec "$JAVACMD" -cp "$(dirname "$0")/gradle/wrapper/gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain "$@"
